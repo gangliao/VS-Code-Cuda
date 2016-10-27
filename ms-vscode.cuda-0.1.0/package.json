@@ -1,0 +1,33 @@
+{
+    "name": "language-cuda",
+    "displayName": "language-cuda",
+    "description": "CUDA Language Support",
+    "version": "0.0.1",
+    "publisher": "hotdogee",
+    "engines": {
+        "vscode": "^0.10.10"
+    },
+    "categories": [
+        "Languages",
+        "Snippets"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "cuda",
+            "aliases": ["CUDA C++", "cuda"],
+            "extensions": [".cu",".cuh",".h"],
+            "configuration": "./cuda.configuration.json"
+        }],
+        "grammars": [{
+            "language": "cuda",
+            "scopeName": "source.cuda-c++",
+            "path": "./syntaxes/cuda-c++.json"
+        }],
+        "snippets": [
+            {
+                "language": "cuda",
+                "path": "./snippets/snippets.json"
+            }
+        ]
+    }
+}

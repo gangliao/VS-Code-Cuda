@@ -1,0 +1,158 @@
+{
+	"def": {
+		"prefix": "def",
+		"body": "#ifndef ${1/([A-Za-z0-9_]+).*/$1/}\n#define ${1:SYMBOL} ${2:value}\n#endif",
+		"description": "#ifndef … #define … #endif",
+		"scope": "source.c, source.c++, source.objc, source.objc++, source.cuda-c++"
+	},
+	"Inc": {
+		"prefix": "Inc",
+		"body": "#include <${1:.h}>",
+		"description": "#include <…>",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"inc": {
+		"prefix": "inc",
+		"body": "#include \"${1:${TM_FILENAME/\\..+$/.h/}}\"",
+		"description": "#include \"…\"",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"beginend": {
+		"prefix": "beginend",
+		"body": "${1:v}${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}begin(), ${1:v}${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}end()",
+		"description": "$1.begin(), $1.end()",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"main": {
+		"prefix": "main",
+		"body": "int main(int argc, char const${TM_C_POINTER: *}argv[])\n{\n\t${0:/* code */}\n\treturn 0;\n}",
+		"description": "main()",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"for": {
+		"prefix": "for",
+		"body": "for (int ${2:i} = 0; $2 < ${1:count}; ${3:++$2})\n{\n\t${0:/* code */}\n}",
+		"description": "For Loop",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"enum": {
+		"prefix": "enum",
+		"body": "enum ${1:name} { $0 };",
+		"description": "Enumeration",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"td": {
+		"prefix": "td",
+		"body": "typedef ${1:int} ${2:MyCustomType};",
+		"description": "Typedef",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"__s": {
+		"prefix": "__s",
+		"body": "\n__syncthreads();\n",
+		"description": "",
+		"scope": "source.cuda-c++"
+	},
+	"class": {
+		"prefix": "class",
+		"body": "class ${1:${TM_FILENAME/(.+)\\..+|.*/$1/:name}}\n{\npublic:\n\t${1/(\\w+).*/$1/}(${2:arguments});\n\t~${1/(\\w+).*/$1/}();\n\n\t${0:/* data */}\n};",
+		"description": "",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"cmal": {
+		"prefix": "cmal",
+		"body": "\ncudaMalloc((void**)&${1:variable}, ${2:bytes});\n",
+		"description": "",
+		"scope": "source.cuda-c++"
+	},
+	"cmalmng": {
+		"prefix": "cmalmng",
+		"body": "\ncudaMallocManaged((void**)&${1:variable}, ${2:bytes});\n",
+		"description": "",
+		"scope": "source.cuda-c++"
+	},
+	"cmem": {
+		"prefix": "cmem",
+		"body": "\ncudaMemcpy(${1:dest}, ${2:src}, ${3:bytes}, cudaMemcpy${4:Host}To${5:Device});\n",
+		"description": "",
+		"scope": "source.cuda-c++"
+	},
+	"do": {
+		"prefix": "do",
+		"body": "do\n{\n\t${0:/* code */}\n} while (${1:/* condition */});",
+		"description": "Do While Loop",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"<<<": {
+		"prefix": "<<<",
+		"body": "\n<<<${1:gridDim}, ${2:blockDim}, ${3:sharedBytes}, ${4:streamId}>>>(${5})\n",
+		"description": "",
+		"scope": "source.cuda-c++"
+	},
+	"forv": {
+		"prefix": "forv",
+		"body": "for (std::vector<$1>::iterator ${3:i} = $2.begin(); $3 != $2.end(); ++$3)\n{\n\t$0\n}",
+		"description": "Vector For Loop",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"fprintf": {
+		"prefix": "fprintf",
+		"body": "fprintf(${1:stderr}, \"${2:%s}\\\\n\"${2/([^%]|%%)*(%.)?.*/(?2:, :\\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\\);)/}",
+		"description": "fprintf …",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"if": {
+		"prefix": "if",
+		"body": "if (${1:/* condition */})\n{\n\t${0:/* code */}\n}",
+		"description": "If Condition",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"kernel": {
+		"prefix": "kernel",
+		"body": "\n__global__ void ${1:kernel}(${2})\n",
+		"description": "",
+		"scope": "source.cuda-c++"
+	},
+	"ns": {
+		"prefix": "ns",
+		"body": "namespace${1/.+/ /m}${1:${TM_FILENAME/^((.*?)\\..*)?$/$2/:mine}}\n{\n\t$0\n}\n",
+		"description": "Namespace",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"printf": {
+		"prefix": "printf",
+		"body": "printf(\"${1:%s}\\\\n\"${1/([^%]|%%)*(%.)?.*/(?2:, :\\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\\);)/}",
+		"description": "printf …",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"readfile": {
+		"prefix": "readfile",
+		"body": "std::vector<char> v;\nif (FILE${TM_C_POINTER: *}fp = fopen(${1:\"filename\"}, \"r\"))\n{\n\tchar buf[1024];\n\twhile (size_t len = fread(buf, 1, sizeof(buf), fp))\n\t\tv.insert(v.end(), buf, buf + len);\n\tfclose(fp);\n}",
+		"description": "Read File Into Vector",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"map": {
+		"prefix": "map",
+		"body": "std::map<${1:key}, ${2:value}> map$0;",
+		"description": "std::map",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"vector": {
+		"prefix": "vector",
+		"body": "std::vector<${1:char}> v$0;",
+		"description": "std::vector",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	},
+	"struct": {
+		"prefix": "struct",
+		"body": "struct ${1:${TM_FILENAME/(.+)\\..+|.*/$/:name}}\n{\n\t${0:/* data */}\n};",
+		"description": "",
+		"scope": "source.c, source.objc, source.c++, source.objc++, source.cuda-c++"
+	},
+	"tp": {
+		"prefix": "tp",
+		"body": "template <typename ${1:_InputIter}>",
+		"description": "template <typename ${1:_InputIter}>",
+		"scope": "source.c++, source.objc++, source.cuda-c++"
+	}
+}
