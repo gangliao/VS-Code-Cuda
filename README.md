@@ -2,8 +2,16 @@
 
 ## This extension is used for developers to contribute [PaddlePaddle](https://github.com/baidu/Paddle) via VS Code.
 
-## This is the README for your extension "cuda"
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+## Installation
+
+Simply copy the ms-vscode.cuda-0.1.0 folder into your .vscode/extensions folder. Depending on your platform it is located:
+
+```
+Windows %USERPROFILE%\.vscode\extensions
+Mac $HOME/.vscode/extensions
+Linux $HOME/.vscode/extensions
+```
+## Update VS Code
 
 * Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
 * Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
@@ -16,5 +24,3 @@ You can author your README using Visual Studio Code.  Here are some useful edito
 ### For more information
 * [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
