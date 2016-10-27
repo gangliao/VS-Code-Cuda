@@ -8,7 +8,7 @@ You can author your README using Visual Studio Code.  Here are some useful edito
 
 
 ## VS Code Syntax highlight
-<img src=/img/out.png width=60%/>
+<img src=/img/out.png width=100%/>
 
 ### For more information
 * [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
