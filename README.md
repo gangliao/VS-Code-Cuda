@@ -1,4 +1,7 @@
 # README
+
+## This extension is used for developers to contribute [PaddlePaddle](https://github.com/baidu/Paddle) via VS Code.
+
 ## This is the README for your extension "cuda"
 You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
 
